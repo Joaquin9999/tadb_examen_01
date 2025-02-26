@@ -1,0 +1,27 @@
+
+WITH EmpleadosPorCargo AS (
+    SELECT 
+        e."id_Cargo",
+        c."nombreCargo",
+        c.salario,
+        COUNT(DISTINCT e."id_Empleado") AS totalEmpleados
+    FROM "Empleado" as e
+    JOIN "Cargo" c ON e."id_Cargo" = c."id_Cargo"
+    GROUP BY e."id_Cargo", c."nombreCargo", c."salario"
+),
+PagosPorEmpleado AS (
+    SELECT 
+        e."id_Cargo",
+        COUNT(h."id_Pago") AS totalPagos
+    FROM "HistorialPago" h
+    JOIN "Empleado" e ON h."id_Empleado" = e."id_Empleado"
+    GROUP BY e."id_Cargo"
+)
+SELECT 
+    epc."nombreCargo",
+    epc.totalEmpleados,
+    COALESCE(ppe.totalPagos * epc.salario, 0) AS totalPago
+FROM EmpleadosPorCargo epc
+LEFT JOIN PagosPorEmpleado ppe ON epc."id_Cargo" = ppe."id_Cargo"
+ORDER BY totalPago DESC;
+
