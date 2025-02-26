@@ -34,9 +34,10 @@ CREATE TABLE `Departamento` (
 
 CREATE TABLE `Nomina` (
   `id_Nomina` int PRIMARY KEY NOT NULL,
-  `totalPago` decimal,
   `id_Departamento` int,
-  `id_Sprint` int
+  `id_Sprint` int,
+  `valor` int,
+  `totalEmpleadosDep` int
 );
 
 CREATE TABLE `Sprint` (
