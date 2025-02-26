@@ -27,7 +27,7 @@ El repositorio está dividido en dos ramas principales, cada una enfocada en un 
 
 ### Resultados de Consultas
 
-##Tecnologias Usadas
+## Tecnologias Usadas
 - MySQL 
 - PostgreSQL 
 - DOCKER
