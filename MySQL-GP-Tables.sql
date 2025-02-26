@@ -41,7 +41,7 @@ CREATE TABLE `Nomina` (
 
 CREATE TABLE `Sprint` (
   `id_Sprint` int PRIMARY KEY NOT NULL,
-  `nombreSprint` varchar(255),
+  `nombreSprint` varchar(255)
 );
 
 ALTER TABLE `HistorialPago` ADD FOREIGN KEY (`id_Empleado`) REFERENCES `Empleado` (`id_Empleado`);
