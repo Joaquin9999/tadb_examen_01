@@ -1,0 +1,23 @@
+|nombreCargo                |totalempleados|totalpago|
+|---------------------------|--------------|---------|
+|Desarrollador Senior       |5             |92.000   |
+|Líder Equipo(Máster)       |5             |72.000   |
+|Director de proyecto       |1             |68.750   |
+|Desarrollador Junior       |5             |64.000   |
+|Arquitecto de Seguridad    |2             |62.500   |
+|Analista de Calidad        |5             |60.000   |
+|Lider Técnico              |1             |56.250   |
+|Lider Financiero           |1             |53.750   |
+|Analista de Seguridad      |2             |50.000   |
+|Ingeniero Pruebas Seguridad|2             |43.750   |
+|Arquitecto de Soluciones   |1             |37.500   |
+|Arquitecto de Datos        |1             |33.750   |
+|Especialist APIs           |1             |30.000   |
+|Ingeniero de Datos         |1             |30.000   |
+|Arquitecto UX              |1             |20.000   |
+|Investigador UX            |1             |18.000   |
+|Diseñador UI               |1             |16.500   |
+|Diseñador de Interacción   |1             |16.500   |
+|Analista Mesa de Ayuda     |1             |13.750   |
+|Arquitecto Devops          |1             |12.500   |
+|Ingeniero SRE              |1             |9.500    |
