@@ -1258,3 +1258,59 @@ BEGIN
     RETURN total_pago;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+
+
+
+DELIMITER $$
+
+--Procedimiento p_calcula_nomina_quincena 
+CREATE PROCEDURE p_calcula_nomina_quincena(IN numeroQuincena INT)
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE idDep INT;
+    DECLARE totalEmpleados INT;
+    DECLARE valorNomina DECIMAL(10,2);
+    DECLARE nuevoIdNomina INT;
+
+    DECLARE curDepartamentos CURSOR FOR
+        SELECT id_Departamento FROM Departamento;
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    OPEN curDepartamentos;
+
+    read_loop: LOOP
+        FETCH curDepartamentos INTO idDep;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        SELECT COUNT(DISTINCT e.id_Empleado) INTO totalEmpleados
+        FROM Empleado e
+        JOIN Equipo eq ON e.id_Equipo = eq.id_Equipo
+        JOIN HistorialPago h ON e.id_Empleado = h.id_Empleado
+        WHERE eq.id_Departamento = idDep
+          AND h.id_Sprint = numeroQuincena;
+
+        SET valorNomina = f_calcula_costo_departamento_quincena(numeroQuincena, idDep);
+
+        SELECT IFNULL(MAX(id_Nomina), 0) + 1 INTO nuevoIdNomina FROM Nomina;
+
+        INSERT INTO Nomina (id_Nomina, id_Departamento, id_Sprint, valor, totalEmpleadosDep)
+        VALUES (nuevoIdNomina, idDep, numeroQuincena, valorNomina, totalEmpleados);
+    END LOOP;
+
+    CLOSE curDepartamentos;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+CALL p_calcula_nomina_quincenas_rango(1, 25);
+
+
+
+
