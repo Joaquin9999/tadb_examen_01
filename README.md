@@ -10,7 +10,7 @@
 
 Este proyecto detalla el proceso completo de abastecimiento de infraestructura, modelado e implementación de bases de datos, junto con el desarrollo de scripts de consultas SQL y la interacción con herramientas de inteligencia artificial.
 
-El repositorio está dividido en dos ramas principales, cada una enfocada en un motor de base de datos distinto:
+El repositorio está dividido en dos ramas principales, cada una enfocada en un motor de base de datos distinto y en cada una se va a encontrar los documentos de abastecimiento y chatgpt de cada uno de los integrantes:
 
 - **MySQL**: Implementación en la nube utilizando **Amazon RDS (AWS)**.
 - **PostgreSQL**: Implementación local utilizando **Docker**.
