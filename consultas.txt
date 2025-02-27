@@ -1,4 +1,4 @@
-
+--CTE
 WITH EmpleadosPorCargo AS (
     SELECT 
         e."id_Cargo",
@@ -25,3 +25,34 @@ FROM EmpleadosPorCargo epc
 LEFT JOIN PagosPorEmpleado ppe ON epc."id_Cargo" = ppe."id_Cargo"
 ORDER BY totalPago DESC;
 
+
+
+
+--Funcion ventana
+WITH totales AS (
+    SELECT
+        s.id_Sprint AS quincena,
+        s.nombreSprint,
+        SUM(c.salario) AS totalPagado
+    FROM HistorialPago hp
+    JOIN Empleado e   ON hp.id_Empleado = e.id_Empleado
+    JOIN Cargo c      ON e.id_Cargo     = c.id_Cargo
+    JOIN Sprint s     ON hp.id_Sprint   = s.id_Sprint
+    GROUP BY s.id_Sprint, s.nombreSprint
+)
+SELECT
+    quincena,
+    nombreSprint,
+    totalPagado,
+    CASE
+       WHEN LAG(totalPagado) OVER (ORDER BY quincena) = 0
+            OR LAG(totalPagado) OVER (ORDER BY quincena) IS NULL
+       THEN 0
+       ELSE
+         ((total_pagado
+           - LAG(totalPagado) OVER (ORDER BY quincena))
+           / LAG(totalPagado) OVER (ORDER BY quincena)
+         ) * 100
+    END AS variacionPorcentual
+FROM totales
+ORDER BY quincena;
